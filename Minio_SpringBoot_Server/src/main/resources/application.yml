@@ -1,0 +1,63 @@
+
+
+# 应用名称
+spring:
+  application:
+    name: minio_demo
+  main:
+    allow-circular-references: true
+
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    name: defaultDataSource
+    password: liteng0220
+    url: jdbc:mysql://localhost:3306/minion?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+
+
+minio:
+  # 访问的url
+  endpoint: http://192.168.10.102
+  # API的端口
+  port: 9001
+  # 秘钥
+  accessKey: 304063711J4OFAP4HNK2
+  secretKey: STrd1wbpZR8iTbj5pI+R8HvnDHvHPYlTRswQJ7x5
+  secure: false
+  bucket-name: test # 桶名 我这是给出了一个默认桶名
+
+server:
+  port: 8086
+
+
+# Json web token
+jwt:
+  # 管理后台过期时间
+  admin-expire-time: 1d
+  # claim 权限 key
+  claim-key-auth: auth
+  # 请求头或请求参数的 key
+  header: Authorization
+  # token 类型
+  token-type: Bearer
+
+
+#设置日志级别
+
+logging:
+  level.com.example.minio: debug
