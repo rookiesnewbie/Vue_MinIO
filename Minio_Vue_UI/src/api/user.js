@@ -28,3 +28,19 @@ export function accountTotal() {
     method: 'get'
   })
 }
+
+export function validatePassword(accountForm) {
+  return request({
+    url: '/account/password',
+    method: 'post',
+    data: accountForm
+  })
+}
+
+export function update(accountForm) {
+  return request({
+    url: '/account/detail',
+    method: 'put',
+    data: accountForm
+  })
+}

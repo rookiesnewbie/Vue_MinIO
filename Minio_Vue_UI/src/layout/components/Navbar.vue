@@ -17,6 +17,11 @@
               首页
             </el-dropdown-item>
           </router-link>
+          <router-link to="/center">
+            <el-dropdown-item>
+              个人中心
+            </el-dropdown-item>
+          </router-link>
           <a target="_blank" href="https://github.com/rookiesnewbie/Vue_MinIO/">
             <el-dropdown-item>Github</el-dropdown-item>
           </a>

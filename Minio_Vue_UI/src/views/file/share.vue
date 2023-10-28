@@ -429,7 +429,7 @@ export default {
       this.uploadData.append('parentId', this.paths[this.paths.length - 1].id)
       this.uploadData.append('isShared', 1)
       uploadFiles(this.uploadData).then(result => {
-        this.$message.success('上传成功')
+        this.$message.success(result.msg)
         this.upload.multipartFiles = []
         this.upload.open = false
         this.handleQuery()

@@ -144,6 +144,10 @@ export default {
           this.$message.error('回收站清空失败' + error)
         }
       })
+    },
+
+    handleCreateFolder(){
+      this.$message.success("还未实现")
     }
   }
 }

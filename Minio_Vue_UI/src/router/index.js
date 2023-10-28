@@ -45,6 +45,20 @@ export const constantRoutes = [
     component: () => import('@/views/404'),
     hidden: true
   },
+  {
+    path: '/account',
+    component: Layout,
+    redirect: '/center',
+    children: [
+      {
+        path: 'center',
+        name: 'center',
+        component: () => import('@/views/accountCenter/index'),
+
+      }
+    ],
+    hidden: true
+  },
 
   {
     path: '/',
@@ -63,7 +77,7 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/fileCenter/personal',
     name: 'fileCenter',
-    icon: 'file-manage',
+    icon: 'el-icon-folder-opened',
     meta: { title: '文件管理',  },
     children: [
       {
@@ -86,6 +100,22 @@ export const constantRoutes = [
       }
     ]
   },
+
+  {
+    path: '/manageCenter',
+    component: Layout,
+    redirect: '/manageCenter/employee',
+    icon: 'manage',
+    name: 'system',
+    meta: { title: '系统管理' },
+    children: [{
+      path: 'employee',
+      name: '员工管理',
+      component: () => import('@/views/system/list'),
+      meta: { title: '用户管理', icon: 'el-icon-user-solid' }
+    },
+    ]
+  }
 
 ]
 
