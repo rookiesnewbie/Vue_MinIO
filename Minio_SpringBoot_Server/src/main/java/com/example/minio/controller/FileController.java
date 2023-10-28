@@ -3,7 +3,7 @@ package com.example.minio.controller;
 
 import com.example.minio.common.Result;
 import com.example.minio.entity.File;
-import com.example.minio.entity.vo.*;
+import com.example.minio.entity.vo.file.*;
 import com.example.minio.service.FileService;
 import io.minio.errors.*;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -80,7 +79,7 @@ public class FileController {
      *
      */
     @PostMapping("/upload")
-    public Result uploadFile(@Valid UploadFileReq req,  @RequestParam MultipartFile[] multipartFiles) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+    public Result uploadFile(@Valid UploadFileReq req, @RequestParam MultipartFile[] multipartFiles) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         fileService.uploadFile(req.getEmpId(),req.getParentId(),req.getIsShared(),multipartFiles);
         return Result.success().message("上传成功");
     }

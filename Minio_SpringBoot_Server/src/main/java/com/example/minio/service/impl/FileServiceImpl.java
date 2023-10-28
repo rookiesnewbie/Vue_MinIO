@@ -16,7 +16,7 @@ import com.example.minio.entity.Account;
 import com.example.minio.entity.Enum.DeleteStatusEnum;
 import com.example.minio.entity.Enum.FileShareTypeEnum;
 import com.example.minio.entity.File;
-import com.example.minio.entity.vo.PageQueryForFileReq;
+import com.example.minio.entity.vo.file.PageQueryForFileReq;
 import com.example.minio.excption.MyException;
 import com.example.minio.mapper.FileMapper;
 import com.example.minio.service.AccountService;
@@ -195,7 +195,7 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements Fi
     public void uploadFile(Long empId, Long parentId, Integer isShared, MultipartFile[] multipartFiles) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         //判断上传的文件是否为空
         if(ArrayUtil.isEmpty(multipartFiles)){
-            return;
+            throw new MyException(500,"上传文件不能空");
         }
 
         //判断bucket存储桶是否存在，不存在则创建

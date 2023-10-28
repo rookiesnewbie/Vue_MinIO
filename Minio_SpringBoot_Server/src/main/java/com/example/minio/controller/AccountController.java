@@ -1,13 +1,14 @@
 package com.example.minio.controller;
 
 
+import com.example.minio.annotation.Checking;
+import com.example.minio.annotation.VerifyParameters;
 import com.example.minio.common.Result;
-import com.example.minio.entity.dto.AccountDto;
 import com.example.minio.entity.Account;
-import com.example.minio.entity.vo.pageQuery;
+import com.example.minio.entity.dto.AccountDto;
+import com.example.minio.entity.vo.file.pageQuery;
 import com.example.minio.service.AccountService;
 import com.example.minio.util.JwtUtil;
-import io.swagger.models.auth.In;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +33,8 @@ public class AccountController {
     private AccountService accountService;
 
     @PostMapping("/login")
-    public Result login(@RequestBody Account account){
+    @Checking
+    public Result login(@VerifyParameters(required = true)@RequestBody  Account account){
         AccountDto accountDto = accountService.login(account);
         return Result.success(accountDto).message("登录成功");
     }
@@ -42,6 +44,7 @@ public class AccountController {
         Account currentUser = JwtUtil.getCurrentUser();
         return Result.success(currentUser);
     }
+
 
     @DeleteMapping("logout")
     public Result logout(){
@@ -60,17 +63,15 @@ public class AccountController {
 
 
     @PostMapping("/add")
-    public Result addAcount(@RequestBody Account account){
-        String password = account.getPassword();
-        String newPassword = DigestUtils.md5DigestAsHex(password.getBytes(StandardCharsets.UTF_8));
-        account.setPassword(newPassword);
+    public Result addAccount(@RequestBody  Account account){
 
-        accountService.saveOrUpdate(account);
+
+        accountService.addAccount(account);
 
         return Result.success().message("添加成功");
     }
 
-    @PutMapping("/update")
+    @PutMapping("/detail")
     public Result updateAcount(@RequestBody Account account){
         String password = account.getPassword();
         String newPassword = DigestUtils.md5DigestAsHex(password.getBytes(StandardCharsets.UTF_8));
@@ -90,7 +91,7 @@ public class AccountController {
     }
 
     @DeleteMapping("/deleteBatch")
-    public Result deleteBatchAcount(List<Integer> ids){
+    public Result deleteBatchAcount(@VerifyParameters(required = true) List<Integer> ids){
 
         accountService.removeBatchByIds(ids);
 

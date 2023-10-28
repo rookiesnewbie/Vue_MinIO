@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.minio.entity.dto.AccountDto;
 import com.example.minio.entity.Account;
-import com.example.minio.entity.vo.pageQuery;
+import com.example.minio.entity.vo.file.pageQuery;
 import com.example.minio.excption.MyException;
 import com.example.minio.mapper.AccountMapper;
 import com.example.minio.service.AccountService;
@@ -80,6 +80,14 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
     @Override
     public Long getAccountTotal() {
         return baseMapper.selectCount(new QueryWrapper<>());
+    }
+
+    @Override
+    public void addAccount(Account account) {
+        String password = account.getPassword();
+        String newPassword = DigestUtils.md5DigestAsHex(password.getBytes(StandardCharsets.UTF_8));
+        account.setPassword(newPassword);
+        baseMapper.insert(account);
     }
 
     private Account getAccount(Account account){

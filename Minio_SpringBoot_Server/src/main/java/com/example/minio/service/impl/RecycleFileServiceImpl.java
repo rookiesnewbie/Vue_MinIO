@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.minio.entity.RecycleFile;
 import com.example.minio.entity.dto.RecycleFileDTO;
-import com.example.minio.entity.vo.PageParam;
+import com.example.minio.entity.vo.file.PageParam;
 import com.example.minio.excption.MyException;
 import com.example.minio.mapper.FileMapper;
 import com.example.minio.mapper.RecycleFileMapper;

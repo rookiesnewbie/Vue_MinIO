@@ -2,8 +2,7 @@ package com.example.minio.controller;
 
 
 import com.example.minio.common.Result;
-import com.example.minio.entity.dto.RecycleFileDTO;
-import com.example.minio.entity.vo.PageParam;
+import com.example.minio.entity.vo.file.PageParam;
 import com.example.minio.service.RecycleFileService;
 import io.minio.errors.*;
 import org.springframework.web.bind.annotation.*;

@@ -2,7 +2,7 @@ package com.example.minio.service;
 
 import com.example.minio.entity.File;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.minio.entity.vo.PageQueryForFileReq;
+import com.example.minio.entity.vo.file.PageQueryForFileReq;
 import io.minio.errors.*;
 import org.springframework.web.multipart.MultipartFile;
 

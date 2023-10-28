@@ -3,7 +3,7 @@ package com.example.minio.service;
 import com.example.minio.entity.dto.AccountDto;
 import com.example.minio.entity.Account;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.minio.entity.vo.pageQuery;
+import com.example.minio.entity.vo.file.pageQuery;
 
 import java.util.Map;
 
@@ -24,4 +24,6 @@ public interface AccountService extends IService<Account> {
     Map<String, Object> getAccountInfoList(pageQuery pageQuery);
 
     Long getAccountTotal();
+
+    void addAccount(Account account);
 }

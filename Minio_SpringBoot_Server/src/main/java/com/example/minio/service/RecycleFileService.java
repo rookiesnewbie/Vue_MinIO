@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.minio.entity.RecycleFile;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.minio.entity.dto.RecycleFileDTO;
-import com.example.minio.entity.vo.PageParam;
+import com.example.minio.entity.vo.file.PageParam;
 import io.minio.errors.*;
 
 import java.io.IOException;
