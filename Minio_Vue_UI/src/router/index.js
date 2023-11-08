@@ -46,13 +46,13 @@ export const constantRoutes = [
     hidden: true
   },
   {
-    path: '/account',
+    path: '/center',
     component: Layout,
-    redirect: '/center',
+    redirect: '/center/index',
     children: [
       {
-        path: 'center',
-        name: 'center',
+        path: 'index',
+        name: '账户中心',
         component: () => import('@/views/accountCenter/index'),
 
       }

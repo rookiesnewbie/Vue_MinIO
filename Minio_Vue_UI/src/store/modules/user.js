@@ -7,7 +7,10 @@ const getDefaultState = () => {
     token: getToken(),
     name: '',
     accountId: '',
-    avatar: ''
+    avatar: '',
+    email: '',
+    registerTime: '',
+    sex: ''
   }
 }
 
@@ -30,6 +33,17 @@ const mutations = {
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
   },
+  SET_EMAIL: (state, email) => {
+    state.email = email
+  },
+  SET_REGISTERTIME: (state, registerTime) => {
+    state.registerTime = registerTime
+  },
+  SET_SEX: (state, sex) => { 
+    state.sex = sex
+  }
+
+  
 
 }
 
@@ -41,6 +55,7 @@ const actions = {
       login({ email: email.trim(), password: password }).then(response => {
         const { data } = response
         commit('SET_TOKEN', data.token)
+        commit('SET_SEX', data.sex)
         setToken(data.token)
         resolve()
       }).catch(error => {
@@ -60,6 +75,9 @@ const actions = {
         commit('SET_NAME', data.nickname)
         commit('SET_AVATAR', data.avatar)
         commit('SET_ACCOUNTID', data.id)
+        commit('SET_EMAIL', data.email)
+        commit('SET_REGISTERTIME', data.registerTime)
+        
         resolve(data)
       }).catch(error => {
         reject(error)

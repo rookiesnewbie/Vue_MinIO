@@ -9,9 +9,9 @@
     >
       <el-row :gutter="18">
         <el-col :span="9">
-          <el-form-item label="账户名" prop="nickname">
-            <el-input v-if="toUpdate" v-model="tmpAccount.nickname" />
-            <span v-else>{{ tmpAccount.nickname }}</span>
+          <el-form-item label="账户名" prop="name">
+            <el-input v-if="toUpdate" v-model="tmpAccount.name" />
+            <span v-else>{{ tmpAccount.name }}</span>
           </el-form-item>
         </el-col>
         <el-col :span="9">
@@ -25,32 +25,14 @@
             <el-tag type="success">{{ tmpAccount.sex === 1?'女' :'男'}}</el-tag>         
           </el-form-item>
         </el-col>
-        <el-col :span="9">
-          <el-form-item label="电话" prop="phone">
-            <el-input v-if="toUpdate" v-model="tmpAccount.phone"/>
-            <span v-else>{{ tmpAccount.phone }}</span>
-          </el-form-item>
-        </el-col>
-        <el-col :span="9">
-          <el-form-item label="生日" prop="birthday">
-            <el-input v-if="toUpdate" v-model="tmpAccount.birthday" />
-            <span v-else>{{ parseDate(tmpAccount.birthday) }}</span>
-          </el-form-item>
-        </el-col>
-        <el-col :span="9">
-          <el-form-item label="部门" prop="deptName">
-            <el-input v-if="toUpdate" v-model="tmpAccount.deptName" />
-            <span v-else>{{ tmpAccount.deptName }}</span>
-          </el-form-item>
-        </el-col>
       </el-row>
       <el-row :gutter="18">
         <el-col :span="9">
           <el-form-item label="注册时间"><span>{{ account.registerTime }}</span></el-form-item>
         </el-col>
-        <el-col :span="9">
+        <!-- <el-col :span="9">
           <el-form-item label="最后登录时间"><span>{{ account.loginTime }}</span></el-form-item>
-        </el-col>
+        </el-col> -->
       </el-row>
       <el-form-item>
         <el-row :gutter="18">
@@ -205,7 +187,7 @@ export default {
       },
       tmpAccount: {
         id: '',
-        nickname: '',
+        name: '',
         email: '',
         phone: '',
         sex: '',
@@ -219,7 +201,7 @@ export default {
   },
   computed: {
     ...mapState({
-      account: state => state.account
+      account: state => state.user
       // account: state => state.data
     })
   },
@@ -269,7 +251,7 @@ export default {
     regainAccountDetail() {
       this.loading = true
       this.btnLoading = true
-      store.dispatch('Detail').then(() => {
+      store.dispatch('user/getInfo').then(() => {
         this.loading = false
         this.btnLoading = false
       })
@@ -281,9 +263,10 @@ export default {
     updateAccount(account) {
       this.btnLoading = true
       updateAccount(account).then(response => {
-        this.$message.success('更新成功')
+        
         this.resetToken(response.data)
         this.regainAccountDetail()
+        this.$message.success('更新成功')
         this.btnLoading = false
       }).catch(res => {
         this.$message.error('更新失败')
