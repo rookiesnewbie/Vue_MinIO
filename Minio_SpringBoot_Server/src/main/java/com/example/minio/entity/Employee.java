@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+import io.gitee.chemors.secure.ext.annotations.DesensitizationProp;
+import io.gitee.chemors.secure.ext.enums.SensitiveTypeEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -35,6 +37,7 @@ public class Employee implements Serializable {
     private Long id;
 
     @ApiModelProperty(value = "员工姓名")
+    @DesensitizationProp(value = SensitiveTypeEnum.CUSTOM,preLength = 1,sufLength = 2)
     private String name;
 
     @ApiModelProperty(value = "账户昵称")
@@ -43,9 +46,11 @@ public class Employee implements Serializable {
     @ApiModelProperty(value = "员工性别 1女，2男")
     private Integer sex;
 
+    @DesensitizationProp(value = SensitiveTypeEnum.MOBILE_PHONE)
     @ApiModelProperty(value = "员工电话")
     private String phone;
 
+    @DesensitizationProp(value = SensitiveTypeEnum.EMAIL)
     @ApiModelProperty(value = "员工邮箱")
     private String email;
 

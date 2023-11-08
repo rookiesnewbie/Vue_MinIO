@@ -6,14 +6,14 @@ import com.example.minio.annotation.VerifyParameters;
 import com.example.minio.common.Result;
 import com.example.minio.entity.Account;
 import com.example.minio.entity.dto.AccountDto;
+import com.example.minio.entity.dto.UpdateAccountPasswordDto;
 import com.example.minio.entity.vo.file.pageQuery;
 import com.example.minio.service.AccountService;
 import com.example.minio.util.JwtUtil;
-import org.springframework.util.DigestUtils;
+import com.example.minio.util.PasswordUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
@@ -73,13 +73,10 @@ public class AccountController {
 
     @PutMapping("/detail")
     public Result updateAcount(@RequestBody Account account){
-        String password = account.getPassword();
-        String newPassword = DigestUtils.md5DigestAsHex(password.getBytes(StandardCharsets.UTF_8));
-        account.setPassword(newPassword);
 
-        accountService.updateById(account);
+        String token = accountService.updateAccount(account);
 
-        return Result.success().message("修改成功");
+        return Result.success(token).message("修改成功");
     }
 
     @DeleteMapping("/delete/{id}")
@@ -104,6 +101,14 @@ public class AccountController {
         Long total = accountService.getAccountTotal();
 
         return Result.success(total);
+    }
+
+    @PostMapping("/password")
+    public Result updatePassword(@RequestBody UpdateAccountPasswordDto accountPasswordDto){
+        final Account account = accountService.getById(accountPasswordDto.getId());
+
+        final Boolean verifyData = accountService.verifyPassword(account.getPassword(), PasswordUtil.encryptPassword(accountPasswordDto.getPassword()));
+        return Result.success(verifyData);
     }
 
 }

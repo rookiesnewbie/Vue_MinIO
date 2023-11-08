@@ -61,3 +61,8 @@ jwt:
 
 logging:
   level.com.example.minio: debug
+
+#开启脱敏注解
+sensitive:
+  enable: true
+  packages: com.example.minio.entity

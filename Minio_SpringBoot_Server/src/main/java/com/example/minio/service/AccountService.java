@@ -26,4 +26,8 @@ public interface AccountService extends IService<Account> {
     Long getAccountTotal();
 
     void addAccount(Account account);
+
+    Boolean verifyPassword(String password, String s);
+
+    String updateAccount(Account account);
 }

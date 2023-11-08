@@ -21,6 +21,7 @@ import com.example.minio.mapper.EmployeeMapper;
 import com.example.minio.service.AccountService;
 import com.example.minio.service.EmployeeService;
 import com.example.minio.util.JwtUtil;
+import io.gitee.chemors.secure.ext.annotations.Desensitization;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -128,6 +129,7 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
 
     //分页查询
     @Override
+    @Desensitization
     public Map<String, Object> getEmployeeList(GetEmployeeListReq req) {
         Map<String, Object> map = new HashMap<>();
         IPage<Employee> employeePage = new Page<>(req.getPageNo(), req.getPageSize());

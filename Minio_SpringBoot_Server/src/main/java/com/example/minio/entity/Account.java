@@ -3,6 +3,8 @@ package com.example.minio.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import io.gitee.chemors.secure.ext.annotations.DesensitizationProp;
+import io.gitee.chemors.secure.ext.enums.SensitiveTypeEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -34,12 +36,15 @@ public class Account implements Serializable {
     private Long id;
 
     @ApiModelProperty(value = "邮箱")
+    @DesensitizationProp(SensitiveTypeEnum.EMAIL)
     private String email;
 
+    @DesensitizationProp(value = SensitiveTypeEnum.CUSTOM,preLength = 1,sufLength = 2)
     @ApiModelProperty(value = "账户昵称")
     private String nickname;
 
     @ApiModelProperty(value = "密码")
+    @DesensitizationProp(SensitiveTypeEnum.PASSWORD)
     private String password;
 
     @ApiModelProperty(value = "注册时间")
